@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com</groupId>
+    <artifactId>alomundow_java_jib_docker</artifactId>
+    <version>0.0.1</version>
+    <packaging>war</packaging>
+
+    <name>alomundow_java_jib_docker</name>
+    
+    <dependencies>
+        
+        <!-- Servlet API -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>       
+        
+    </dependencies>
+
+    <build>
+        <plugins>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+            </plugin> 
+            
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.5.2</version>
+                <configuration>
+                    <!-- Define a imagem base utilizada na construção -->
+                    <from>                        
+                        <image>tomcat:9.0-jdk8</image>
+                    </from>                    
+                    <!-- Define o nome e a versão da imagem gerada -->                  
+                    <to>                        
+                        <image>osmarbraz/${project.artifactId}:${project.version}</image>
+                    </to>                    
+                    <!-- Define o diretório de trabalho do container -->
+                    <workingDirectory>/usr/local/tomcat/webapps/ROOT</workingDirectory>
+                    <!-- Configuração do container -->                    
+                    <container>
+                        <!-- Define o diretório onde a aplicação será instalada -->
+                        <appRoot>/usr/local/tomcat/webapps/ROOT</appRoot>      
+                        <!-- Define a porta utilizada pela aplicação -->               
+                        <ports>
+                            <port>8080</port>
+                        </ports>  
+                        <!-- Define o formato padrão OCI (Open Container Initiative) para a imagem -->
+                        <format>OCI</format>                      
+                    </container>
+                </configuration>
+            </plugin>       
+                                
+        </plugins>
+    </build>
+
+</project>
